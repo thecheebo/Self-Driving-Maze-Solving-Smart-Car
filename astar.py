@@ -1,6 +1,7 @@
 
 import move as m
 import operator
+import tf_image_detection as tf
 
 class Node():
     """A node class for A* Pathfinding"""
@@ -134,7 +135,7 @@ def main():
     path = astar(maze, start, end)
     print(path)
 
-    while (start != end):
+    while (tf.can_move() and start != end):
         path = astar(maze, start, end)
         next = (path[1][0] - start[0], path[1][1] - start[1])
         if direction == "east":
