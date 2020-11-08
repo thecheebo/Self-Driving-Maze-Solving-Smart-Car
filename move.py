@@ -11,7 +11,7 @@ def mforward():
     speed4.start()
     fc.forward(speed)
     x = 0
-    for i in range(10):
+    for i in range(8):
         time.sleep(0.1)
 
     speed4.deinit()
@@ -33,7 +33,7 @@ def mleft():
     speed4.start()
     fc.turn_left(15)
     x = 0
-    for i in range(13):
+    for i in range(12):
         time.sleep(0.1)
     speed4.deinit()
     fc.stop()
@@ -43,10 +43,11 @@ def mleft():
 def mright():
     speed4 = fc.Speed(25)
     speed4.start()
-    fc.turn_right(18)
+    fc.turn_right(19)
     x = 0
     for i in range(12):
         time.sleep(0.1)
     speed4.deinit()
     fc.stop()
+
 
