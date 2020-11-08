@@ -1,4 +1,4 @@
-
+import time
 import move as m
 import operator
 import tf_image_detection as tf
@@ -126,84 +126,86 @@ def main():
             [0, 0, 0]]
 
     start = (0, 0)
-    end = (4, 2)
+    end = (4, 0)
     direction = "east"
 
-    #path = astar(maze, start, end)
-    #print(path)
     move_count = 0
     path = astar(maze, start, end)
+    print("Calculating A-Star Algorithm")
     print(path)
 
-    while (tf.can_move() and start != end):
-        path = astar(maze, start, end)
-        next = (path[1][0] - start[0], path[1][1] - start[1])
-        if direction == "east":
-            if next == (0, 1):
-                m.mforward()
-                start = adder(start, next)
-            elif next == (1, 0):
-                m.mright()
-                m.mforward()
-                direction = "south"
-                start = adder(start, next)
-            elif next == (0, -1):
-                m.mright()
-                m.mright()
-                m.mforward()
-                direction = "west"
-                start = adder(start, next)
-            print("Next move is " + str(next))
-            print("Current location is" + str(start) + " and direction is " + direction)
-            print("Move count is: " + str(move_count))
-            move_count += 1
+    while (start != end):
+        if tf.can_move():
+            path = astar(maze, start, end)
+            next = (path[1][0] - start[0], path[1][1] - start[1])
+            if direction == "east":
+                if next == (0, 1):
+                    m.mforward()
+                    start = adder(start, next)
+                elif next == (1, 0):
+                    m.mright()
+                    m.mforward()
+                    direction = "south"
+                    start = adder(start, next)
+                elif next == (0, -1):
+                    m.mright()
+                    m.mright()
+                    m.mforward()
+                    direction = "west"
+                    start = adder(start, next)
+                print("Next move is " + str(next))
+                print("Current location is" + str(start) + " and direction is " + direction)
+                print("Move count is: " + str(move_count))
+                move_count += 1
 
-            update_map(maze, start, direction)
-        elif direction == "south":
-            if next == (0, 1):
-                m.mleft()
-                m.mforward()
-                direction = "east"
-                start = adder(start, next)
-            elif next == (1, 0):
-                m.mforward()
-                start = adder(start, next)
-            elif next == (0, -1):
-                m.mright()
-                m.mforward()
-                direction = "west"
-                start = adder(start, next)
-            print("Next move is " + str(next))
-            print("Current location is" + str(start) + " and direction is " + direction)
-            print("Move count is: " + str(move_count))
-            move_count += 1
+                update_map(maze, start, direction)
+            elif direction == "south":
+                if next == (0, 1):
+                    m.mleft()
+                    m.mforward()
+                    direction = "east"
+                    start = adder(start, next)
+                elif next == (1, 0):
+                    m.mforward()
+                    start = adder(start, next)
+                elif next == (0, -1):
+                    m.mright()
+                    m.mforward()
+                    direction = "west"
+                    start = adder(start, next)
+                print("Next move is " + str(next))
+                print("Current location is" + str(start) + " and direction is " + direction)
+                print("Move count is: " + str(move_count))
+                move_count += 1
 
-            update_map(maze, start, direction)
-        elif direction == "west":
-            if next == (0, 1):
-                m.mright()
-                m.mright()
-                m.mforward()
-                direction = "east"
-                start = adder(start, next)
-            elif next == (1, 0):
-                m.mleft()
-                m.mforward()
-                direction = "south"
-                start = adder(start, next)
-            elif next == (0, -1):
-                m.mforward()
-                start = adder(start, next)
-            print("Next move is " + str(next))
-            print("Current location is" + str(start) + " and direction is " + direction)
-            print("Move count is: " + str(move_count))
-            move_count += 1
+                update_map(maze, start, direction)
+            elif direction == "west":
+                if next == (0, 1):
+                    m.mright()
+                    m.mright()
+                    m.mforward()
+                    direction = "east"
+                    start = adder(start, next)
+                elif next == (1, 0):
+                    m.mleft()
+                    m.mforward()
+                    direction = "south"
+                    start = adder(start, next)
+                elif next == (0, -1):
+                    m.mforward()
+                    start = adder(start, next)
+                print("Next move is " + str(next))
+                print("Current location is" + str(start) + " and direction is " + direction)
+                print("Move count is: " + str(move_count))
+                move_count += 1
 
-            update_map(maze, start, direction)
-
+                update_map(maze, start, direction)
+        else:
+            time.sleep(5)
 
     #navigate(path, facing)
 
 
 if __name__ == '__main__':
     main()
+
