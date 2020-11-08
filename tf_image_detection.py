@@ -90,13 +90,13 @@ def can_move(detection_threshold = DETECTION_THRESHOLD):
             for detected_obj_data in results:
               if detected_obj_data["label"] in ['person', 'stop sign']:
                 print ("stopping car", detected_obj_data["label"], "detected")
-                return True
+                return False
             stream.seek(0)
             stream.truncate()
 
         finally:
           camera.stop_preview()
-    return False
+    return True
 
 
 
