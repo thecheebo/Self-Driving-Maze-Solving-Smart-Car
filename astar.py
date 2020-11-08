@@ -1,6 +1,7 @@
 
 import move as m
 import operator
+import tf_image_detection as tf
 
 class Node():
     """A node class for A* Pathfinding"""
@@ -104,13 +105,13 @@ def adder(start, next):
     ''' Updates the location of the vehicle '''
     return tuple(map(operator.add, next, start))
 
-def update_map(maze, start, direction)
+def update_map(maze, start, direction):
     x, y = start
     if direction == "east":
         x = x + 1
     elif direction == "south":
         y = y + 1
-    elif direction == "west"
+    elif direction == "west":
         x = x - 1
     #if scan():
     #    maze[x][y] = 1
@@ -134,7 +135,7 @@ def main():
     path = astar(maze, start, end)
     print(path)
 
-    while (start != end):
+    while (tf.can_move() and start != end):
         path = astar(maze, start, end)
         next = (path[1][0] - start[0], path[1][1] - start[1])
         if direction == "east":
@@ -156,7 +157,7 @@ def main():
             print("Current location is" + str(start) + " and direction is " + direction)
             print("Move count is: " + str(move_count))
             move_count += 1
-            
+
             update_map(maze, start, direction)
         elif direction == "south":
             if next == (0, 1):
@@ -176,7 +177,7 @@ def main():
             print("Current location is" + str(start) + " and direction is " + direction)
             print("Move count is: " + str(move_count))
             move_count += 1
-            
+
             update_map(maze, start, direction)
         elif direction == "west":
             if next == (0, 1):
@@ -193,13 +194,13 @@ def main():
             elif next == (0, -1):
                 m.mforward()
                 start = adder(start, next)
-            print("Next move is " + str(next))    
+            print("Next move is " + str(next))
             print("Current location is" + str(start) + " and direction is " + direction)
             print("Move count is: " + str(move_count))
             move_count += 1
-            
+
             update_map(maze, start, direction)
-            
+
 
     #navigate(path, facing)
 
